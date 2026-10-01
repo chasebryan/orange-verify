@@ -1,0 +1,85 @@
+test_action_cannot_claim_formal_proof (test_gate.NativeCompilerTests.test_action_cannot_claim_formal_proof) ... ok
+test_action_persists_reports_and_outputs_on_failure (test_gate.NativeCompilerTests.test_action_persists_reports_and_outputs_on_failure) ... ok
+test_action_rejects_mutable_source_ref (test_gate.NativeCompilerTests.test_action_rejects_mutable_source_ref) ... ok
+test_action_rejects_relative_compiler (test_gate.NativeCompilerTests.test_action_rejects_relative_compiler) ... ok
+test_check_mode_admits_source_without_assertions (test_gate.NativeCompilerTests.test_check_mode_admits_source_without_assertions) ... ok
+test_real_broken_assertion_fails_with_file_location (test_gate.NativeCompilerTests.test_real_broken_assertion_fails_with_file_location) ... ok
+test_real_budget_exhaustion_cannot_pass (test_gate.NativeCompilerTests.test_real_budget_exhaustion_cannot_pass) ... ok
+test_real_compiler_diagnostic_has_a_position (test_gate.NativeCompilerTests.test_real_compiler_diagnostic_has_a_position) ... ok
+test_real_native_assertions_pass (test_gate.NativeCompilerTests.test_real_native_assertions_pass) ... ok
+test_real_rfc8439_quarter_round (test_gate.NativeCompilerTests.test_real_rfc8439_quarter_round) ... ok
+test_real_zero_test_source_cannot_pass_test_mode (test_gate.NativeCompilerTests.test_real_zero_test_source_cannot_pass_test_mode) ... ok
+test_shell_metacharacters_and_leading_dash_are_literal_paths (test_gate.NativeCompilerTests.test_shell_metacharacters_and_leading_dash_are_literal_paths) ... ok
+test_annotations_escape_command_and_property_controls (test_gate.ValueTests.test_annotations_escape_command_and_property_controls) ... ok
+test_invalid_budgets_fail (test_gate.ValueTests.test_invalid_budgets_fail) ... ok
+test_backslash_source_name_round_trips (test_gate.WorkspaceTests.test_backslash_source_name_round_trips) ... ok
+test_compiler_diagnostic_keeps_source_position (test_gate.WorkspaceTests.test_compiler_diagnostic_keeps_source_position) ... ok
+test_compiler_failure_without_diagnostic_cannot_pass (test_gate.WorkspaceTests.test_compiler_failure_without_diagnostic_cannot_pass) ... ok
+test_control_character_filename_fails (test_gate.WorkspaceTests.test_control_character_filename_fails) ... ok
+test_crashed_compiler_cannot_pass (test_gate.WorkspaceTests.test_crashed_compiler_cannot_pass) ... ok
+test_directory_selection_is_sorted_and_deduplicated (test_gate.WorkspaceTests.test_directory_selection_is_sorted_and_deduplicated) ... ok
+test_each_selection_must_match (test_gate.WorkspaceTests.test_each_selection_must_match) ... ok
+test_empty_directory_fails (test_gate.WorkspaceTests.test_empty_directory_fails) ... ok
+test_escaped_unicode_source_name_round_trips (test_gate.WorkspaceTests.test_escaped_unicode_source_name_round_trips) ... ok
+test_generated_sarif_records_no_proof_claim (test_gate.WorkspaceTests.test_generated_sarif_records_no_proof_claim) ... ok
+test_git_metadata_is_excluded (test_gate.WorkspaceTests.test_git_metadata_is_excluded) ... ok
+test_glob_without_matches_fails (test_gate.WorkspaceTests.test_glob_without_matches_fails) ... ok
+test_imported_module_position_is_kept (test_gate.WorkspaceTests.test_imported_module_position_is_kept) ... ok
+test_malformed_test_report_cannot_pass (test_gate.WorkspaceTests.test_malformed_test_report_cannot_pass) ... ok
+test_missing_paths_fails (test_gate.WorkspaceTests.test_missing_paths_fails) ... ok
+test_missing_report_cannot_pass (test_gate.WorkspaceTests.test_missing_report_cannot_pass) ... ok
+test_non_or_selection_fails (test_gate.WorkspaceTests.test_non_or_selection_fails) ... ok
+test_outside_diagnostic_has_no_invented_region (test_gate.WorkspaceTests.test_outside_diagnostic_has_no_invented_region) ... ok
+test_oversized_compiler_output_cannot_pass (test_gate.WorkspaceTests.test_oversized_compiler_output_cannot_pass) ... ok
+test_oversized_source_fails_before_execution (test_gate.WorkspaceTests.test_oversized_source_fails_before_execution) ... ok
+test_parent_and_absolute_paths_fail (test_gate.WorkspaceTests.test_parent_and_absolute_paths_fail) ... ok
+test_paths_with_spaces_are_supported (test_gate.WorkspaceTests.test_paths_with_spaces_are_supported) ... ok
+test_symlinked_file_fails (test_gate.WorkspaceTests.test_symlinked_file_fails) ... ok
+test_symlinked_parent_fails (test_gate.WorkspaceTests.test_symlinked_parent_fails) ... ok
+test_timeout_cannot_pass (test_gate.WorkspaceTests.test_timeout_cannot_pass) ... ok
+test_untrusted_stdout_cannot_inject_runner_commands (test_gate.WorkspaceTests.test_untrusted_stdout_cannot_inject_runner_commands) ... ok
+
+----------------------------------------------------------------------
+Ran 40 tests in 1.305s
+
+OK
+Orange check "no-tests.or"
+Orange test "fail.or"
+orangec | test "deliberately broken CI assertion" ... FAILED
+orangec | 1 test: 0 passed, 1 failed
+Orange test "pass.or"
+orangec | error[ORC0301]: reference evaluation step limit exceeded
+orangec |  --> pass.or:4:8
+orangec |   |
+orangec | 4 |   test "rotate by eight bits" { rotate(0x12345678) == 0x34567812 }
+orangec |   |        ^^^^^^^^^^^^^^^^^^^^^^ evaluation stopped while evaluating this test
+orangec |   = note: at most 1 evaluation steps are permitted
+orangec |   = note: no test outcome is reported
+orangec |   = note: `orangec test --steps N` sets the budget, up to 1073741824 steps
+Orange check "bad.or"
+orangec | error[ORC0001]: unexpected character '@'
+orangec |  --> bad.or:2:14
+orangec |   |
+orangec | 2 | module bad { @ }
+orangec |   |              ^ character is not part of Orange 2026
+orangec |   = note: identifiers are ASCII in this pre-alpha edition
+Orange test "pass.or"
+orangec | test "rotate by eight bits" ... ok
+orangec | test "rotate zero" ... ok
+orangec | 2 tests: 2 passed, 0 failed
+Orange test "rfc8439.or"
+orangec | test "RFC 8439 section 2.1.1: quarter round" ... ok
+orangec | 1 test: 1 passed, 0 failed
+Orange test "no-tests.or"
+orangec | 0 tests: 0 passed, 0 failed
+Orange test "-odd $(touch marker).or"
+orangec | test "rotate by eight bits" ... ok
+orangec | test "rotate zero" ... ok
+orangec | 2 tests: 2 passed, 0 failed
+Orange check "hello.or"
+Orange check "hello.or"
+Orange test "hello.or"
+orangec | 0 tests: 0 passed, 1 failed
+Orange test "hello.or"
+orangec | unexpected output
+Orange test "hello.or"

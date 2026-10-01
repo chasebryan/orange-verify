@@ -1,0 +1,63 @@
+{
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Orange Verify",
+          "version": "0.1.0-dev",
+          "informationUri": "https://github.com/chasebryan/orange",
+          "rules": [
+            {
+              "id": "ORANGE-TEST-FAILED",
+              "shortDescription": {
+                "text": "ORANGE-TEST-FAILED"
+              }
+            }
+          ]
+        }
+      },
+      "columnKind": "unicodeCodePoints",
+      "originalUriBaseIds": {
+        "%SRCROOT%": {
+          "uri": "file:///workspace/scratch/d968a99eb452/orange-verify/"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "ORANGE-TEST-FAILED",
+          "level": "error",
+          "message": {
+            "text": "Native assertion failed: deliberately broken CI assertion"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/fail.or",
+                  "uriBaseId": "%SRCROOT%"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "properties": {
+        "claimKind": "native-assertions",
+        "formalProofChecking": false,
+        "compilerProvenance": {
+          "provenance": "caller-supplied",
+          "sourceCommit": null,
+          "version": "orangec 0.0.1 (Orange edition 2026; implemented slice S3r)",
+          "binarySha256": "c7b94cee73892f74f43106cbd187c2ef28e4caa620f2d5955b0f8b0003233387"
+        }
+      }
+    }
+  ]
+}

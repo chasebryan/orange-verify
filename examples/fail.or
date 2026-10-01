@@ -1,0 +1,4 @@
+edition 2026;
+module broken {
+  test "deliberately broken CI assertion" { false }
+}

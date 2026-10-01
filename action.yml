@@ -1,0 +1,62 @@
+name: Orange Verify
+description: Validate Orange source and run native assertions in CI. Pre-alpha; no proof checking.
+author: Chase Bryan
+branding:
+  icon: check-circle
+  color: orange
+inputs:
+  paths:
+    description: One Orange entry point, directory, or glob per line, relative to the checked-out repository. Every selection must match.
+    required: true
+  mode:
+    description: test runs native assertions and requires at least one test in every selected entry point; check validates source only.
+    default: test
+  orange-ref:
+    description: Full immutable Orange source commit to build. Branches and tags are rejected.
+    default: 4a6390645d91627490214e42319ffc86fc1a83ab
+  orangec:
+    description: Optional absolute path to an existing compiler. Skips installation; reports its provenance as caller-supplied.
+    default: ''
+  steps:
+    description: Evaluation step budget per test entry point, from 1 to 1073741824.
+    default: '1048576'
+  timeout-seconds:
+    description: Wall-clock limit per entry point, from 1 to 3600 seconds.
+    default: '120'
+outputs:
+  status:
+    description: passed or failed.
+    value: ${{ steps.verify.outputs.status }}
+  files:
+    description: Number of selected entry points.
+    value: ${{ steps.verify.outputs.files }}
+  tests:
+    description: Number of native assertions reported by the compiler.
+    value: ${{ steps.verify.outputs.tests }}
+  failed-tests:
+    description: Number of failing native assertions reported by the compiler.
+    value: ${{ steps.verify.outputs.failed-tests }}
+  sarif-file:
+    description: Absolute path to the generated SARIF 2.1.0 report.
+    value: ${{ steps.verify.outputs.sarif-file }}
+  report-file:
+    description: Absolute path to the JSON run report, including provenance and file digests.
+    value: ${{ steps.verify.outputs.report-file }}
+  orangec:
+    description: Absolute path to the compiler used, available for another Action invocation in the same job.
+    value: ${{ steps.verify.outputs.orangec }}
+runs:
+  using: composite
+  steps:
+    - name: Validate Orange source and run assertions
+      id: verify
+      shell: bash
+      env:
+        ORANGE_ACTION_PATH: ${{ github.action_path }}
+        ORANGE_INPUT_PATHS: ${{ inputs.paths }}
+        ORANGE_INPUT_MODE: ${{ inputs.mode }}
+        ORANGE_INPUT_REF: ${{ inputs.orange-ref }}
+        ORANGE_INPUT_ORANGEC: ${{ inputs.orangec }}
+        ORANGE_INPUT_STEPS: ${{ inputs.steps }}
+        ORANGE_INPUT_TIMEOUT: ${{ inputs.timeout-seconds }}
+      run: python3 -I "$ORANGE_ACTION_PATH/scripts/run.py"

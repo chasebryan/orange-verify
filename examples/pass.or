@@ -1,0 +1,6 @@
+edition 2026;
+module smoke {
+  spec rotate(x: Word[32]) -> Word[32] { x <<< 8 }
+  test "rotate by eight bits" { rotate(0x12345678) == 0x34567812 }
+  test "rotate zero" { rotate(0) == 0 }
+}

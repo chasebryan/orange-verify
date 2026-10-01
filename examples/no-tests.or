@@ -1,0 +1,4 @@
+edition 2026;
+module empty {
+  spec run() -> Bool { true }
+}

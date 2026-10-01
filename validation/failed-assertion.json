@@ -1,0 +1,59 @@
+{
+  "actionVersion": "0.1.0-dev",
+  "mode": "test",
+  "status": "failed",
+  "claimKind": "native-assertions",
+  "formalProofChecking": false,
+  "compiler": {
+    "provenance": "caller-supplied",
+    "sourceCommit": null,
+    "version": "orangec 0.0.1 (Orange edition 2026; implemented slice S3r)",
+    "binarySha256": "c7b94cee73892f74f43106cbd187c2ef28e4caa620f2d5955b0f8b0003233387"
+  },
+  "files": [
+    {
+      "path": "examples/fail.or",
+      "sha256": "c1a9bfabf31e9b51db9dd0fbdb39e7851e17cf66166084957907deecd761e6e2",
+      "command": [
+        "/workspace/scratch/d968a99eb452/orange-action-install-675v0qah/target/release/orangec",
+        "test",
+        "--steps",
+        "1048576",
+        "--",
+        "examples/fail.or"
+      ],
+      "tests": 1,
+      "failedTests": 1,
+      "exitCode": 1,
+      "stdout": "test \"deliberately broken CI assertion\" ... FAILED\n1 test: 0 passed, 1 failed\n",
+      "stderr": "",
+      "status": "failed"
+    }
+  ],
+  "findings": [
+    {
+      "ruleId": "ORANGE-TEST-FAILED",
+      "level": "error",
+      "message": {
+        "text": "Native assertion failed: deliberately broken CI assertion"
+      },
+      "locations": [
+        {
+          "physicalLocation": {
+            "artifactLocation": {
+              "uri": "examples/fail.or",
+              "uriBaseId": "%SRCROOT%"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "tests": 1,
+  "failedTests": 1,
+  "selectedFiles": [
+    "examples/fail.or"
+  ],
+  "steps": 1048576,
+  "timeoutSeconds": 120
+}

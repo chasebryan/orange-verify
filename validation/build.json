@@ -1,0 +1,23 @@
+{
+  "sourceRepository": "https://github.com/chasebryan/orange.git",
+  "sourceCommit": "4a6390645d91627490214e42319ffc86fc1a83ab",
+  "sourceAcquisition": "fresh checkout through local Git transport; remote network not exercised",
+  "rustVersion": "1.96.1",
+  "cargoArguments": [
+    "+1.96.1",
+    "build",
+    "--locked",
+    "--offline",
+    "--release",
+    "--manifest-path",
+    "/workspace/scratch/d968a99eb452/orange-action-install-675v0qah/source/compiler/Cargo.toml",
+    "-p",
+    "orangec",
+    "--target-dir",
+    "/workspace/scratch/d968a99eb452/orange-action-install-675v0qah/target"
+  ],
+  "binarySha256": "c7b94cee73892f74f43106cbd187c2ef28e4caa620f2d5955b0f8b0003233387",
+  "hostedWorkflowExecuted": false,
+  "separatelyProvisionedRebuilds": false,
+  "formalProofChecking": false
+}

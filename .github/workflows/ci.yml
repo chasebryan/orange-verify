@@ -1,0 +1,94 @@
+name: Action CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: orange-verify-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out the wrapper
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Build pinned Orange and pass native assertions
+        id: valid
+        uses: ./
+        with:
+          paths: |
+            examples/pass.or
+            examples/rfc8439.or
+      - name: Run gate regression tests against the real compiler
+        env:
+          ORANGEC: ${{ steps.valid.outputs.orangec }}
+        run: |
+          test -n "$ORANGEC"
+          python3 -m unittest discover -s tests -v
+      - name: Reject a deliberately broken assertion
+        id: broken
+        continue-on-error: true
+        uses: ./
+        with:
+          paths: examples/fail.or
+          orangec: ${{ steps.valid.outputs.orangec }}
+      - name: Reject an entry point with no tests
+        id: empty
+        continue-on-error: true
+        uses: ./
+        with:
+          paths: examples/no-tests.or
+          orangec: ${{ steps.valid.outputs.orangec }}
+      - name: Check expected outcomes and failure reports
+        if: ${{ always() }}
+        env:
+          VALID_OUTCOME: ${{ steps.valid.outcome }}
+          BROKEN_OUTCOME: ${{ steps.broken.outcome }}
+          EMPTY_OUTCOME: ${{ steps.empty.outcome }}
+          VALID_REPORT: ${{ steps.valid.outputs.report-file }}
+          BROKEN_REPORT: ${{ steps.broken.outputs.report-file }}
+          EMPTY_REPORT: ${{ steps.empty.outputs.report-file }}
+          BROKEN_SARIF: ${{ steps.broken.outputs.sarif-file }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          assert os.environ['VALID_OUTCOME'] == 'success'
+          assert os.environ['BROKEN_OUTCOME'] == 'failure'
+          assert os.environ['EMPTY_OUTCOME'] == 'failure'
+          valid = json.loads(Path(os.environ['VALID_REPORT']).read_text())
+          broken = json.loads(Path(os.environ['BROKEN_REPORT']).read_text())
+          empty = json.loads(Path(os.environ['EMPTY_REPORT']).read_text())
+          sarif = json.loads(Path(os.environ['BROKEN_SARIF']).read_text())
+          assert valid['status'] == 'passed' and valid['tests'] == 3
+          assert valid['compiler']['provenance'] == 'source-build'
+          assert broken['status'] == 'failed' and broken['failedTests'] == 1
+          assert empty['status'] == 'failed' and empty['tests'] == 0
+          assert sarif['version'] == '2.1.0'
+          assert not sarif['runs'][0]['properties']['formalProofChecking']
+          assert all(not report['formalProofChecking'] for report in (valid, broken, empty))
+          PY
+      - name: Retain passing and failing reports
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: orange-verify-ci-reports
+          path: |
+            ${{ steps.valid.outputs.report-file }}
+            ${{ steps.valid.outputs.sarif-file }}
+            ${{ steps.broken.outputs.report-file }}
+            ${{ steps.broken.outputs.sarif-file }}
+            ${{ steps.empty.outputs.report-file }}
+            ${{ steps.empty.outputs.sarif-file }}
+          if-no-files-found: error

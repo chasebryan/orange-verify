@@ -1,0 +1,79 @@
+{
+  "actionVersion": "0.1.0-dev",
+  "mode": "test",
+  "status": "passed",
+  "claimKind": "native-assertions",
+  "formalProofChecking": false,
+  "compiler": {
+    "provenance": "caller-supplied",
+    "sourceCommit": null,
+    "version": "orangec 0.0.1 (Orange edition 2026; implemented slice S3r)",
+    "binarySha256": "c7b94cee73892f74f43106cbd187c2ef28e4caa620f2d5955b0f8b0003233387"
+  },
+  "files": [
+    {
+      "path": "compiler/fixtures/s3q/valid-rfc8439-tests.or",
+      "sha256": "9f1300d52c436132aab81926bb8eef5f8cddc02772d4ec25480b9877aba74ab6",
+      "command": [
+        "/workspace/scratch/d968a99eb452/orange-action-install-675v0qah/target/release/orangec",
+        "test",
+        "--steps",
+        "1048576",
+        "--",
+        "compiler/fixtures/s3q/valid-rfc8439-tests.or"
+      ],
+      "tests": 7,
+      "failedTests": 0,
+      "exitCode": 0,
+      "stdout": "test \"2.1.1: the quarter round\" ... ok\ntest \"2.3.2: the block function\" ... ok\ntest \"A.1 #1: the zero key's key stream, block 0\" ... ok\ntest \"A.1 #2: the zero key's key stream, block 1\" ... ok\ntest \"the nonce changes every block\" ... ok\ntest \"2.5.2: Poly1305 of the Forum's name\" ... ok\ntest \"A.3 #1: Poly1305 of zeros under the zero key\" ... ok\n7 tests: 7 passed, 0 failed\n",
+      "stderr": "",
+      "status": "passed"
+    },
+    {
+      "path": "compiler/fixtures/s3r/valid-rc6.or",
+      "sha256": "2a7dd017d99b50788042054ed64a8744e9e64e9bb85a66a9eec5ccb35901562d",
+      "command": [
+        "/workspace/scratch/d968a99eb452/orange-action-install-675v0qah/target/release/orangec",
+        "test",
+        "--steps",
+        "1048576",
+        "--",
+        "compiler/fixtures/s3r/valid-rc6.or"
+      ],
+      "tests": 4,
+      "failedTests": 0,
+      "exitCode": 0,
+      "stdout": "test \"RC6 paper, 128-bit key 1: encryption\" ... ok\ntest \"RC6 paper, 128-bit key 1: decryption\" ... ok\ntest \"RC6 paper, 128-bit key 2: encryption\" ... ok\ntest \"RC6 paper, 128-bit key 2: decryption\" ... ok\n4 tests: 4 passed, 0 failed\n",
+      "stderr": "",
+      "status": "passed"
+    },
+    {
+      "path": "compiler/fixtures/s3r/valid-sha3.or",
+      "sha256": "235cdb842dbf7f73d167fb52da44afcf0e45a68de19c5a92bb61d6f9e6738438",
+      "command": [
+        "/workspace/scratch/d968a99eb452/orange-action-install-675v0qah/target/release/orangec",
+        "test",
+        "--steps",
+        "1048576",
+        "--",
+        "compiler/fixtures/s3r/valid-sha3.or"
+      ],
+      "tests": 4,
+      "failedTests": 0,
+      "exitCode": 0,
+      "stdout": "test \"FIPS 202 example: SHA3-256 of abc\" ... ok\ntest \"FIPS 202 example: SHA3-256 of the 448-bit message\" ... ok\ntest \"133 bytes of a, the longest message of one block\" ... ok\ntest \"the round constants of iota\" ... ok\n4 tests: 4 passed, 0 failed\n",
+      "stderr": "",
+      "status": "passed"
+    }
+  ],
+  "findings": [],
+  "tests": 15,
+  "failedTests": 0,
+  "selectedFiles": [
+    "compiler/fixtures/s3q/valid-rfc8439-tests.or",
+    "compiler/fixtures/s3r/valid-rc6.or",
+    "compiler/fixtures/s3r/valid-sha3.or"
+  ],
+  "steps": 1048576,
+  "timeoutSeconds": 120
+}
