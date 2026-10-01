@@ -1,5 +1,7 @@
 # Orange Verify
 
+[![Action CI](https://github.com/chasebryan/orange-verify/actions/workflows/ci.yml/badge.svg)](https://github.com/chasebryan/orange-verify/actions/workflows/ci.yml)
+
 **Run your Orange assertions in CI.**
 
 Orange Verify builds a pinned Orange compiler, validates your selected entry
@@ -20,8 +22,9 @@ loaded by Orange; a library without its own assertions belongs behind a test
 entry point or in a separate `mode: check` invocation.
 
 The wrapper source lives in `chasebryan/orange-verify`. No Marketplace release
-or version tag exists yet. The example uses the moving development branch;
-replace `main` with the full reviewed Action commit SHA for repeatable CI.
+or version tag exists yet. The example pins the first source snapshot whose
+hosted Action CI passed, including all 40 regression tests and the expected
+failure cases. Review and pin a new full commit SHA when upgrading.
 
 ```yaml
 name: Orange assertions
@@ -40,7 +43,7 @@ jobs:
           persist-credentials: false
       - name: Run Orange assertions
         id: orange
-        uses: chasebryan/orange-verify@main
+        uses: chasebryan/orange-verify@7f736f30d2546abef85bb56d6c08a20fe4862625
         with:
           paths: |
             crypto/tests.or
@@ -156,8 +159,11 @@ compiler and tests the installed Action as a local composite Action.
 
 The wrapper source is hosted in the separate
 [orange-verify repository](https://github.com/chasebryan/orange-verify).
-It has not been released or registered in GitHub Marketplace. The owner release
-decision and licensing scope still need to be established. Orange currently has no outbound license and
+Hosted [Action CI](https://github.com/chasebryan/orange-verify/actions/runs/36867834282)
+passed the source build, 40 regression tests, expected failure cases, and report
+retention checks. It has not been released or registered in GitHub Marketplace.
+The owner release decision and licensing scope still need to be established.
+Orange currently has no outbound license and
 no authorized product release. This package makes neither decision.
 Owner development and testing can proceed; public use needs the rights
 and release boundary recorded in Orange's policy.

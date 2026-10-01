@@ -1,0 +1,28 @@
+{
+  "wrapperCommit": "7f736f30d2546abef85bb56d6c08a20fe4862625",
+  "workflow": "Action CI",
+  "runId": 36867834282,
+  "runUrl": "https://github.com/chasebryan/orange-verify/actions/runs/36867834282",
+  "status": "completed",
+  "conclusion": "success",
+  "runner": "ubuntu-24.04",
+  "regressionTests": 40,
+  "primaryInvocation": {
+    "entryPoints": 2,
+    "assertions": 3
+  },
+  "expectedFailures": [
+    "native assertion evaluates to false",
+    "entry point has zero native assertions"
+  ],
+  "compositeFailureOutputsVerified": true,
+  "retainedReports": 6,
+  "artifact": {
+    "id": 11164970919,
+    "name": "orange-verify-ci-reports",
+    "sha256": "sha256:9a522a20d7ed4f177db3046c368e0baefcf7e09e3c65eb935da150bafe438263",
+    "url": "https://github.com/chasebryan/orange-verify/actions/runs/36867834282/artifacts/11164970919"
+  },
+  "formalProofChecking": false,
+  "marketplacePublished": false
+}

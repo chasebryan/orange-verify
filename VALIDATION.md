@@ -1,9 +1,9 @@
 # Development validation — 1 October 2026
 
-The standalone Orange Verify wrapper passed the local validation recorded
-below. This initial record predates its hosted CI run. The wrapper source is
-being uploaded to `chasebryan/orange-verify`; no release or Marketplace listing
-has been created.
+The standalone Orange Verify wrapper passed both local and hosted validation.
+Its source is in `chasebryan/orange-verify`; no release or Marketplace listing
+has been created. The local record below precedes the hosted run recorded
+at the end of this document.
 
 | Check | Result |
 | --- | --- |
@@ -30,17 +30,33 @@ the fresh source build used for those runs.
 
 SARIF structure and locations have unit coverage and local JSON checks. No
 full external SARIF-schema validator or actual GitHub code-scanning upload
-was run. The hosted CI workflow includes assertions that composite outputs
-and reports survive failed invocations; that integration remains to be run.
+was run. The hosted CI workflow checked that composite outputs and reports
+survive failed invocations; that integration passed.
 
 The local Git acquisition test exercises the same installer path with an
 exact source commit and a fresh checkout. It does not establish the runner's
-future network access to GitHub or Rust distribution servers. Both local
-compiler builds took place in the same execution environment, so they are
-not separately provisioned owner rebuilds or independent reproducibility
-evidence.
+future network access to GitHub or Rust distribution servers. The hosted run
+then fetched the immutable source and built it on a GitHub runner. The two
+local compiler builds took place in the same execution environment. No binary
+comparison across separately provisioned environments was performed, and
+none of these owner-controlled runs is independent reproducibility evidence.
 
 These results concern implemented source validation and native assertions.
 Formal proof checking, cryptographic security, refinement, constant-time
 behavior, production readiness, and independent review are not established.
 Licensing and publication decisions remain with the owner.
+
+## Hosted Action CI
+
+[Run 36867834282](https://github.com/chasebryan/orange-verify/actions/runs/36867834282)
+passed for wrapper commit `7f736f30d2546abef85bb56d6c08a20fe4862625` on
+Ubuntu 24.04. The log confirms all 40 regression tests passed with the real
+compiler. The primary invocation passed three native assertions across two
+entry points. The deliberately broken assertion and zero-test invocation
+failed as expected, and the workflow's outcome/report assertions passed.
+
+Six JSON/SARIF files were retained in
+[orange-verify-ci-reports](https://github.com/chasebryan/orange-verify/actions/runs/36867834282/artifacts/11164970919),
+artifact ID `11164970919`, SHA-256
+`9a522a20d7ed4f177db3046c368e0baefcf7e09e3c65eb935da150bafe438263`.
+The machine-readable record is `validation/hosted.json`.

@@ -26,8 +26,10 @@ release is within an authorized source-preview boundary. If it is, satisfy
 the applicable release gates rather than treating green Action CI as release
 authorization. The package includes no toolchain binary and chooses no license.
 
-The local validation report is development evidence. Hosted Action CI and
-any policy-required separately provisioned rebuilds are still outstanding.
+The local and hosted validation reports are development evidence. Hosted
+[Action CI](https://github.com/chasebryan/orange-verify/actions/runs/36867834282)
+passed, including expected failures and report retention. Any policy-required
+rebuild comparison and the owner release decision are still outstanding.
 The owner controls both development and publication; do not describe that
 as independent review.
 
